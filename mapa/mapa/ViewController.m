@@ -13,6 +13,8 @@
 
 @interface ViewController ()
 
+@property (strong , nonatomic) NSArray *Adresses;
+
 @end
 
 @implementation ViewController
@@ -21,7 +23,12 @@
     
     [self initLocationServise];
     [self addGestureToMap];
-
+    
+    self.myTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.myTableView.hidden = YES;
+    
+    self.Adresses = @[];
+    
     if(IS_OS_8_OR_LATER){
         NSUInteger code = [CLLocationManager authorizationStatus];
         if (code == kCLAuthorizationStatusNotDetermined && ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)] || [self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
@@ -36,6 +43,110 @@
     
     
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.Adresses.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    MKMapItem *item = self.Adresses[indexPath.row];
+    
+    cell.textLabel.text = item.placemark.name;
+    
+    return cell;
+
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    
+    [UITableView transitionWithView: self.myTableView
+                           duration:0.5
+                            options: UIViewAnimationOptionTransitionFlipFromTop
+                         animations:^{
+                             self.myTableView.hidden = YES;
+                         }completion: ^ (BOOL finished){
+                             [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                             MKMapItem *item = self.Adresses[indexPath.row];
+                             [self setPinOnMap:item.placemark.location setRegion:YES];
+                             
+                         }];
+    
+}
+
+
+-(void)startSearch:(NSString *)searchString {
+    
+    if (self.localSearch.searching)
+    {
+        [self.localSearch cancel];
+    }
+    
+    
+    MKCoordinateRegion newRegion;
+    newRegion.center.latitude = self.locationManager.location.coordinate.latitude+0.001555;
+    newRegion.center.longitude = self.locationManager.location.coordinate.longitude;
+    
+    newRegion.span.latitudeDelta = 0.112872;
+    newRegion.span.longitudeDelta = 0.109863;
+    
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+    
+    request.naturalLanguageQuery = searchString;
+    request.region = newRegion;
+    
+    
+    MKLocalSearchCompletionHandler completionHandler = ^(MKLocalSearchResponse *response, NSError *error) {
+        
+        if (error != nil) {
+            [self.localSearch cancel];
+            self.localSearch = nil;
+            NSLog(@"Erro");
+        } else {
+            if([response mapItems].count > 0){
+                
+                self.Adresses = [response mapItems];
+    
+
+                [UITableView transitionWithView: self.myTableView
+                                       duration:0.5
+                                        options: UIViewAnimationOptionTransitionFlipFromTop
+                                     animations:^{
+                                         
+                                         self.myTableView.hidden = NO;
+                                         
+                                     }completion: ^ (BOOL finished){
+                                         [self.myTableView reloadData];
+                                     }];
+
+                
+                
+                
+                NSLog(@"%@", response);
+            }else{
+                NSLog(@"Erro");
+            }
+        }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    };
+    
+    if (self.localSearch != nil) {
+        self.localSearch = nil;
+    }
+    self.localSearch = [[MKLocalSearch alloc] initWithRequest:request];
+    
+    [self.localSearch startWithCompletionHandler:completionHandler];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+}
+
+
 
 -(void)addGestureToMap{
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMap:)];
@@ -53,10 +164,10 @@
     CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
     CLLocation *location  = [[CLLocation alloc] initWithLatitude:touchMapCoordinate.latitude longitude:touchMapCoordinate.longitude];
     
-    [self setPinOnMap:location];
+    [self setPinOnMap:location setRegion:NO];
 }
 
--(void)setPinOnMap:(CLLocation *)location{
+-(void)setPinOnMap:(CLLocation *)location setRegion:(BOOL)myregion{
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     MKCoordinateRegion region;
     region.center.latitude = location.coordinate.latitude;
@@ -64,6 +175,10 @@
     annotation.coordinate = region.center;
     annotation.title = @"lala";
     annotation.subtitle = @"lalal123";
+    
+    if(myregion){
+        [self setCenterMap:location];
+    }
     
     [self.mapView addAnnotation:annotation];
 }
@@ -85,13 +200,22 @@
     NSLog(@"lng = %f",self.locationManager.location.coordinate.longitude);
     [self centerMap];
     [self colectAddress];
-    [self setPinOnMap:self.locationManager.location];
+    [self setPinOnMap:self.locationManager.location setRegion:NO];
 }
 
 -(void) centerMap{
     MKCoordinateRegion newRegion;
     newRegion.center.latitude = self.locationManager.location.coordinate.latitude;
     newRegion.center.longitude = self.locationManager.location.coordinate.longitude;
+    newRegion.span.latitudeDelta = 0.0005;
+    newRegion.span.longitudeDelta = 0.0005;
+    [self.mapView setRegion:newRegion];
+}
+
+-(void) setCenterMap:(CLLocation *)location{
+    MKCoordinateRegion newRegion;
+    newRegion.center.latitude = location.coordinate.latitude;
+    newRegion.center.longitude = location.coordinate.longitude;
     newRegion.span.latitudeDelta = 0.0005;
     newRegion.span.longitudeDelta = 0.0005;
     [self.mapView setRegion:newRegion];
@@ -109,6 +233,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+
+    [self.view endEditing:YES];
+    [self startSearch:self.searchField.text];
+
+    
+    return YES;
+}
+
+
 
 
 @end
