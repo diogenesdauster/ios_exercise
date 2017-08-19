@@ -246,6 +246,26 @@
 }
 
 
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+    if([annotation isKindOfClass:[MKUserLocation class]]){
+        return nil;
+    }
+    
+    UIImage *image = [UIImage imageNamed:@"mapPin"];
+    
+    MKAnnotationView *pinView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"mapPin"];
+    
+    if(pinView != nil){
+        pinView.annotation = annotation;
+    }else{
+        pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"mapPin"];
+        pinView.image = image;
+        
+    }
+    return pinView;
+}
+
+
 
 
 @end
