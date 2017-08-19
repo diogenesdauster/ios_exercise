@@ -34,6 +34,20 @@
     }
 }
 
+- (IBAction)getLocation:(id)sender {
+    NSLog(@"lat = %f",self.locationManager.location.coordinate.latitude);
+    NSLog(@"lng = %f",self.locationManager.location.coordinate.longitude);
+    [self centerMap];
+}
+
+-(void) centerMap{
+    MKCoordinateRegion newRegion;
+    newRegion.center.latitude = self.locationManager.location.coordinate.latitude;
+    newRegion.center.longitude = self.locationManager.location.coordinate.longitude;
+    newRegion.span.latitudeDelta = 0.0005;
+    newRegion.span.longitudeDelta = 0.0005;
+    [self.mapView setRegion:newRegion];
+}
 
 -(void) initLocationServise{
     self.locationManager = [[CLLocationManager alloc] init];
