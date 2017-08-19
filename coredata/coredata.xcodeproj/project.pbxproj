@@ -18,6 +18,7 @@
 		810DD1481F48ADB300F72AC1 /* Picture+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 810DD1421F48ADB300F72AC1 /* Picture+CoreDataProperties.m */; };
 		810DD1491F48ADB300F72AC1 /* Product+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 810DD1441F48ADB300F72AC1 /* Product+CoreDataClass.m */; };
 		810DD14A1F48ADB300F72AC1 /* Product+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 810DD1461F48ADB300F72AC1 /* Product+CoreDataProperties.m */; };
+		810DD14D1F48B55F00F72AC1 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 810DD14C1F48B55F00F72AC1 /* ListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,8 @@
 		810DD1441F48ADB300F72AC1 /* Product+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Product+CoreDataClass.m"; sourceTree = "<group>"; };
 		810DD1451F48ADB300F72AC1 /* Product+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Product+CoreDataProperties.h"; sourceTree = "<group>"; };
 		810DD1461F48ADB300F72AC1 /* Product+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Product+CoreDataProperties.m"; sourceTree = "<group>"; };
+		810DD14B1F48B55F00F72AC1 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		810DD14C1F48B55F00F72AC1 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,8 @@
 				810DD1281F48A95C00F72AC1 /* AppDelegate.m */,
 				810DD12A1F48A95C00F72AC1 /* ViewController.h */,
 				810DD12B1F48A95C00F72AC1 /* ViewController.m */,
+				810DD14B1F48B55F00F72AC1 /* ListViewController.h */,
+				810DD14C1F48B55F00F72AC1 /* ListViewController.m */,
 				810DD12D1F48A95C00F72AC1 /* Main.storyboard */,
 				810DD1331F48A95C00F72AC1 /* Assets.xcassets */,
 				810DD1351F48A95C00F72AC1 /* LaunchScreen.storyboard */,
@@ -183,6 +188,7 @@
 			files = (
 				810DD1471F48ADB300F72AC1 /* Picture+CoreDataClass.m in Sources */,
 				810DD1491F48ADB300F72AC1 /* Product+CoreDataClass.m in Sources */,
+				810DD14D1F48B55F00F72AC1 /* ListViewController.m in Sources */,
 				810DD1321F48A95C00F72AC1 /* coredata.xcdatamodeld in Sources */,
 				810DD14A1F48ADB300F72AC1 /* Product+CoreDataProperties.m in Sources */,
 				810DD1481F48ADB300F72AC1 /* Picture+CoreDataProperties.m in Sources */,

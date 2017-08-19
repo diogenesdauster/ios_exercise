@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Product : NSManagedObject
 
++(Product *)newProduct:(NSDictionary *)elements;
++(NSArray *) allProducts;
+
 @end
 
 NS_ASSUME_NONNULL_END
