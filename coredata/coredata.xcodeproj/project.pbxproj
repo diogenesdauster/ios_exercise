@@ -14,6 +14,10 @@
 		810DD1321F48A95C00F72AC1 /* coredata.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 810DD1301F48A95C00F72AC1 /* coredata.xcdatamodeld */; };
 		810DD1341F48A95C00F72AC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 810DD1331F48A95C00F72AC1 /* Assets.xcassets */; };
 		810DD1371F48A95C00F72AC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 810DD1351F48A95C00F72AC1 /* LaunchScreen.storyboard */; };
+		810DD1471F48ADB300F72AC1 /* Picture+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 810DD1401F48ADB300F72AC1 /* Picture+CoreDataClass.m */; };
+		810DD1481F48ADB300F72AC1 /* Picture+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 810DD1421F48ADB300F72AC1 /* Picture+CoreDataProperties.m */; };
+		810DD1491F48ADB300F72AC1 /* Product+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 810DD1441F48ADB300F72AC1 /* Product+CoreDataClass.m */; };
+		810DD14A1F48ADB300F72AC1 /* Product+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 810DD1461F48ADB300F72AC1 /* Product+CoreDataProperties.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,14 @@
 		810DD1331F48A95C00F72AC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		810DD1361F48A95C00F72AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		810DD1381F48A95C00F72AC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		810DD13F1F48ADB300F72AC1 /* Picture+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Picture+CoreDataClass.h"; sourceTree = "<group>"; };
+		810DD1401F48ADB300F72AC1 /* Picture+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Picture+CoreDataClass.m"; sourceTree = "<group>"; };
+		810DD1411F48ADB300F72AC1 /* Picture+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Picture+CoreDataProperties.h"; sourceTree = "<group>"; };
+		810DD1421F48ADB300F72AC1 /* Picture+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Picture+CoreDataProperties.m"; sourceTree = "<group>"; };
+		810DD1431F48ADB300F72AC1 /* Product+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Product+CoreDataClass.h"; sourceTree = "<group>"; };
+		810DD1441F48ADB300F72AC1 /* Product+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Product+CoreDataClass.m"; sourceTree = "<group>"; };
+		810DD1451F48ADB300F72AC1 /* Product+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Product+CoreDataProperties.h"; sourceTree = "<group>"; };
+		810DD1461F48ADB300F72AC1 /* Product+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Product+CoreDataProperties.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +72,7 @@
 		810DD1231F48A95C00F72AC1 /* coredata */ = {
 			isa = PBXGroup;
 			children = (
+				810DD13E1F48AD3500F72AC1 /* Model */,
 				810DD1271F48A95C00F72AC1 /* AppDelegate.h */,
 				810DD1281F48A95C00F72AC1 /* AppDelegate.m */,
 				810DD12A1F48A95C00F72AC1 /* ViewController.h */,
@@ -80,6 +93,21 @@
 				810DD1251F48A95C00F72AC1 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		810DD13E1F48AD3500F72AC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				810DD13F1F48ADB300F72AC1 /* Picture+CoreDataClass.h */,
+				810DD1401F48ADB300F72AC1 /* Picture+CoreDataClass.m */,
+				810DD1411F48ADB300F72AC1 /* Picture+CoreDataProperties.h */,
+				810DD1421F48ADB300F72AC1 /* Picture+CoreDataProperties.m */,
+				810DD1431F48ADB300F72AC1 /* Product+CoreDataClass.h */,
+				810DD1441F48ADB300F72AC1 /* Product+CoreDataClass.m */,
+				810DD1451F48ADB300F72AC1 /* Product+CoreDataProperties.h */,
+				810DD1461F48ADB300F72AC1 /* Product+CoreDataProperties.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,7 +181,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				810DD1471F48ADB300F72AC1 /* Picture+CoreDataClass.m in Sources */,
+				810DD1491F48ADB300F72AC1 /* Product+CoreDataClass.m in Sources */,
 				810DD1321F48A95C00F72AC1 /* coredata.xcdatamodeld in Sources */,
+				810DD14A1F48ADB300F72AC1 /* Product+CoreDataProperties.m in Sources */,
+				810DD1481F48ADB300F72AC1 /* Picture+CoreDataProperties.m in Sources */,
 				810DD12C1F48A95C00F72AC1 /* ViewController.m in Sources */,
 				810DD1291F48A95C00F72AC1 /* AppDelegate.m in Sources */,
 				810DD1261F48A95C00F72AC1 /* main.m in Sources */,
