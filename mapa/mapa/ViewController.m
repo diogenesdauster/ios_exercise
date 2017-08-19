@@ -34,10 +34,21 @@
     }
 }
 
+
+-(void)colectAddress{
+    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    [geoCoder reverseGeocodeLocation:self.locationManager.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        CLPlacemark *placemark = placemarks[0];
+        NSLog(@"%@", placemark.thoroughfare);
+        NSLog(@"%@", placemark.subLocality);
+    }];
+}
+
 - (IBAction)getLocation:(id)sender {
     NSLog(@"lat = %f",self.locationManager.location.coordinate.latitude);
     NSLog(@"lng = %f",self.locationManager.location.coordinate.longitude);
     [self centerMap];
+    [self colectAddress];
 }
 
 -(void) centerMap{
