@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     
     [self initLocationServise];
+    [self addGestureToMap];
 
     if(IS_OS_8_OR_LATER){
         NSUInteger code = [CLLocationManager authorizationStatus];
@@ -32,8 +33,40 @@
             }
         }
     }
+    
+    
 }
 
+-(void)addGestureToMap{
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMap:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    tapGesture.delaysTouchesBegan = YES;
+    
+    [tapGesture setCancelsTouchesInView:YES];
+    [self.mapView addGestureRecognizer:tapGesture];
+}
+
+-(void)tapMap:(UITapGestureRecognizer *)recognizer{
+    CGPoint touchPoint = [recognizer locationInView:self.mapView];
+    
+    CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+    CLLocation *location  = [[CLLocation alloc] initWithLatitude:touchMapCoordinate.latitude longitude:touchMapCoordinate.longitude];
+    
+    [self setPinOnMap:location];
+}
+
+-(void)setPinOnMap:(CLLocation *)location{
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    MKCoordinateRegion region;
+    region.center.latitude = location.coordinate.latitude;
+    region.center.longitude = location.coordinate.longitude;
+    annotation.coordinate = region.center;
+    annotation.title = @"lala";
+    annotation.subtitle = @"lalal123";
+    
+    [self.mapView addAnnotation:annotation];
+}
 
 -(void)colectAddress{
     CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
@@ -43,12 +76,16 @@
         NSLog(@"%@", placemark.subLocality);
     }];
 }
+- (IBAction)removeLocations:(id)sender {
+    [self.mapView removeAnnotations:self.mapView.annotations];
+}
 
 - (IBAction)getLocation:(id)sender {
     NSLog(@"lat = %f",self.locationManager.location.coordinate.latitude);
     NSLog(@"lng = %f",self.locationManager.location.coordinate.longitude);
     [self centerMap];
     [self colectAddress];
+    [self setPinOnMap:self.locationManager.location];
 }
 
 -(void) centerMap{

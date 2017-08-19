@@ -28,8 +28,16 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="zn4-62-6vb"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I80-Qg-lqK">
+                                <rect key="frame" x="257" y="66" width="112" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="remover"/>
+                                <connections>
+                                    <action selector="removeLocations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="49h-W1-fN1"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ava-OW-F7q">
-                                <rect key="frame" x="131" y="66" width="112" height="72"/>
+                                <rect key="frame" x="16" y="66" width="112" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="location"/>
                                 <connections>
