@@ -260,6 +260,7 @@
     }else{
         pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"mapPin"];
         pinView.image = image;
+        pinView.centerOffset = CGPointMake(0, -pinView.image.size.height / 2 + 3 );
         
     }
     return pinView;
